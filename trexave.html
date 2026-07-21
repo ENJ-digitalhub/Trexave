@@ -6,6 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
     content="Trexave builds retail infrastructure for African businesses — starting with RetailOS, a local-first sales and inventory system that runs on the PC already in your store.">
+  <meta property="og:title" content="TREXAVE — Retail Infrastructure for Emerging Markets">
+  <meta property="og:description"
+    content="Trexave builds retail infrastructure for African businesses — starting with RetailOS, a local-first sales and inventory system that runs on the PC already in your store.">
+  <meta property="og:image" content="https://YOUR-DOMAIN/img/trexave-og.jpg">
+  <meta property="og:url" content="https://YOUR-DOMAIN/trexave.html">
+  <meta name="twitter:card" content="summary_large_image">
   <title>TREXAVE — Retail Infrastructure for Emerging Markets</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,7 +42,7 @@
         <div class="header-actions">
           <a href="#cta" class="btn btn-primary">Get Started</a>
           <button id="theme-toggle" class="icon-btn" aria-label="Toggle light and dark mode">
-            <span class="icon">&#9728;</span> <!--Sun icon-->
+            <span class="icon">&#127769;</span> <!--Moon icon-->
           </button>
           <!-- FIX: nav-toggle button added — style.css hides .main-nav below 760px
                and only shows this button; without it mobile visitors had no way
@@ -138,7 +144,8 @@
           with room to grow toward multi-store and cloud-connected tools as businesses scale.</p>
 
         <img src="img/high-level-description-a-flat-vector-tec_olvL5L_bWgOrj_0UokaCSg_7sqfNInHTBy626uUx2vOAA_cover.jpg"
-          class="card" style="margin-top: 56px; padding: 40px; text-align: center;"></img>
+          class="card" style="margin-top: 56px; padding: 40px; text-align: center;"
+          alt="Illustration of Trexave's local-first retail infrastructure approach">
       </div>
     </div>
   </section>
@@ -284,6 +291,34 @@
       <p>© 2026 TREXAVE. Building retail infrastructure for emerging markets.</p>
     </div>
   </footer>
+
+  <script>
+    // Dark/Light Mode Toggle — now backed by the [data-theme="light"]
+    // block added to style.css, so this actually changes the page.
+    const themeToggle = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme) {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      themeToggle.innerHTML = currentTheme === 'dark'
+        ? '<span class="icon">&#9728;</span>'  // Sun icon
+        : '<span class="icon">&#127769;</span>';    // Moon icon
+    }
+
+    themeToggle.addEventListener('click', () => {
+      // No attribute set = the default state, which is dark.
+      const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        themeToggle.innerHTML = '<span class="icon">&#127769;</span>';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeToggle.innerHTML = '<span class="icon">&#9728;</span>';
+      }
+    });
+  </script>
 
   <!-- FIX: script includes added. Without emailjs's SDK, script.js's
        emailjs.init(...) call throws and silently kills every feature that

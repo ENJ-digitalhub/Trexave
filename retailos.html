@@ -6,6 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
     content="RetailOS turns the PC already in your store into a local server for sales, inventory, and reporting — no cloud subscription required to keep the register running.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="RetailOS — Sales & Inventory Management for Local Stores">
+  <meta property="og:description"
+    content="RetailOS turns the PC already in your store into a local server for sales, inventory, and reporting — no cloud subscription required to keep the register running.">
+  <meta property="og:image" content="https://YOUR-DOMAIN/img/retailos-og.jpg">
+  <meta property="og:url" content="https://YOUR-DOMAIN/retailos.html">
+  <meta name="twitter:card" content="summary_large_image">
   <title>RetailOS — Sales & Inventory Management for Local Stores</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +30,7 @@
     <div class="container">
       <div class="header-inner">
         <div class="logo">
-          <div class="logo-icon">R</div>
+          <img src="img/retailos.png" alt="RetailOS Logo" style="height: 32px;"></img>
           <span>RetailOS</span>
         </div>
         <nav class="main-nav">
@@ -36,13 +43,9 @@
         <div class="header-actions">
           <a href="#cta" class="btn btn-primary">Join Beta</a>
           <button id="theme-toggle" class="icon-btn" aria-label="Toggle light and dark mode">
-            <span class="icon">&#9728;</span> <!--Sun icon-->
+            <span class="icon">&#127769;</span> <!--Moon icon-->
           </button>
-          <!-- FIX: language selector removed. It listed 11 languages but only
-               ever logged the selection to the console — presenting a control
-               that visibly does nothing is worse than not offering it. Add it
-               back once real translation strings exist (index.html already
-               has a working pattern for this). -->
+
         </div>
       </div>
     </div>
@@ -193,6 +196,10 @@
                 </div>
               </div>
             </div>
+            <h2>Comprehensive Reporting</h2>
+            <p style="color: var(--text-faint); font-size: 0.85rem; margin-top: -8px; margin-bottom: 24px;">
+              Sample data shown for illustration — live store data will look like this once onboarded.
+            </p>
           </div>
         </div>
       </div>
@@ -323,7 +330,8 @@
       </div>
 
       <img src="img/high-level-description-a-minimal-technic_yIEvfsHTXVWi6moIODACPw_TNvdQXN1SEa4HBq-sjLTTQ_cover.jpg"
-        class="sync-diagram"></img>
+        class="sync-diagram"
+        alt="Diagram showing the store PC as local server, staff phones connecting over WiFi, and reports updating automatically">
     </div>
   </section>
 
@@ -760,8 +768,8 @@
     if (currentTheme) {
       document.documentElement.setAttribute('data-theme', currentTheme);
       themeToggle.innerHTML = currentTheme === 'dark'
-        ? '<span class="icon">&#127769;</span>'  // Moon icon
-        : '<span class="icon">&#9728;</span>';    // Sun icon
+        ? '<span class="icon">&#9728;</span>'  // Sun icon
+        : '<span class="icon">&#127769;</span>';    // Moon icon
     }
 
     themeToggle.addEventListener('click', () => {
@@ -770,11 +778,11 @@
       if (theme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
-        themeToggle.innerHTML = '<span class="icon">&#9728;</span>';
+        themeToggle.innerHTML = '<span class="icon">&#127769;</span>';
       } else {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
-        themeToggle.innerHTML = '<span class="icon">&#127769;</span>';
+        themeToggle.innerHTML = '<span class="icon">&#9728;</span>';
       }
     });
   </script>
