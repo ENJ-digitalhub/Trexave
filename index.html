@@ -4,294 +4,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
   <title>TREXAVE — Company Resource Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="img/trexave.png" type="image/x-icon">
   <style>
-    /* ==========================================================
-       TREXAVE Resource Hub — premium redesign
-       Structure, hrefs and content preserved from original build.
-       New: theme toggle (dark/light), language toggle (EN/FR),
-       glass 3D cards, ambient gradient field, scroll reveals.
-       ========================================================== */
-
-    :root {
-      --accent: #ff7a00;
-      --accent-soft: rgba(255, 122, 0, 0.16);
-      --emerald: #2fd68c;
-      --emerald-soft: rgba(47, 214, 140, 0.14);
-
-      --bg: #08090b;
-      --bg-elevated: #0d0f12;
-      --surface: rgba(255, 255, 255, 0.035);
-      --surface-2: rgba(255, 255, 255, 0.065);
-      --border: rgba(255, 255, 255, 0.09);
-      --border-soft: rgba(255, 255, 255, 0.06);
-      --text: #f2f3f5;
-      --text-dim: #b7bac0;
-      --text-faint: #7a7d84;
-
-      --radius-sm: 12px;
-      --radius-md: 20px;
-      --radius-lg: 28px;
-
-      --font-display: 'Space Grotesk', 'Inter', sans-serif;
-      --font-body: 'Inter', sans-serif;
-      --font-mono: 'IBM Plex Mono', monospace;
-
-      --shadow-lift: 0 20px 60px -20px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.25);
-      --shadow-hover: 0 30px 80px -20px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.06);
-
-      color-scheme: dark;
-    }
-
-    [data-theme="light"] {
-      --bg: #f4f3f1;
-      --bg-elevated: #ffffff;
-      --surface: rgba(255, 255, 255, 0.75);
-      --surface-2: rgba(255, 255, 255, 0.95);
-      --border: rgba(20, 20, 20, 0.09);
-      --border-soft: rgba(20, 20, 20, 0.07);
-      --text: #16171a;
-      --text-dim: #52555c;
-      --text-faint: #86898f;
-      --accent-soft: rgba(255, 122, 0, 0.10);
-      --emerald-soft: rgba(47, 214, 140, 0.10);
-      --shadow-lift: 0 20px 50px -24px rgba(20, 20, 20, 0.20), 0 2px 8px rgba(20, 20, 20, 0.06);
-      --shadow-hover: 0 30px 70px -24px rgba(20, 20, 20, 0.28), 0 0 0 1px rgba(20, 20, 20, 0.06);
-      color-scheme: light;
-    }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      -webkit-font-smoothing: antialiased;
-      transition: background 0.5s ease, color 0.5s ease;
-      overflow-x: hidden;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
-      html { scroll-behavior: auto; }
-    }
-
-    a { color: inherit; }
-
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 28px;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* ---------- ambient background field ---------- */
-
-    .bg-field {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(70px);
-      opacity: 0.55;
-      will-change: transform;
-    }
-
-    [data-theme="light"] .blob { opacity: 0.35; }
-
-    .blob-1 {
-      width: 620px; height: 620px;
-      top: -220px; left: -160px;
-      background: radial-gradient(circle at 30% 30%, var(--accent) 0%, transparent 70%);
-      animation: drift1 26s ease-in-out infinite;
-    }
-
-    .blob-2 {
-      width: 520px; height: 520px;
-      bottom: -200px; right: -140px;
-      background: radial-gradient(circle at 60% 40%, var(--emerald) 0%, transparent 70%);
-      animation: drift2 32s ease-in-out infinite;
-    }
-
-    .blob-3 {
-      width: 380px; height: 380px;
-      top: 40%; left: 60%;
-      background: radial-gradient(circle at 50% 50%, var(--accent) 0%, transparent 72%);
-      opacity: 0.25;
-      animation: drift3 40s ease-in-out infinite;
-    }
-
-    .grain {
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
-      background-size: 3px 3px;
-      mix-blend-mode: overlay;
-      opacity: 0.4;
-    }
-
-    [data-theme="light"] .grain { opacity: 0.15; }
-
-    @keyframes drift1 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(60px, 50px) scale(1.08); }
-    }
-    @keyframes drift2 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-50px, -40px) scale(1.06); }
-    }
-    @keyframes drift3 {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(-80px, 60px); }
-    }
-
-    /* ---------- top controls ---------- */
-
-    .top-controls {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 20;
-      display: flex;
-      gap: 10px;
-    }
-
-    .ctrl-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--surface);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.03em;
-      padding: 9px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      box-shadow: var(--shadow-lift);
-      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .ctrl-btn:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .ctrl-btn:active { transform: translateY(0) scale(0.97); }
-
-    .ctrl-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
-
-    /* ---------- layout shell ---------- */
-
     .resource-hub {
-      position: relative;
-      z-index: 1;
       min-height: 100vh;
-      padding: 96px 0 48px;
+      padding: 48px 0;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255, 122, 0, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(47, 214, 140, 0.03) 0%, transparent 50%),
+        var(--bg);
     }
-
-    /* ---------- hero / header ---------- */
 
     .hub-header {
-      margin-bottom: 64px;
-      padding-bottom: 32px;
+      margin-bottom: 56px;
       border-bottom: 1px solid var(--border-soft);
-      opacity: 0;
-      transform: translateY(18px);
-      animation: enter 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+      padding-bottom: 24px;
     }
-
-    @keyframes enter {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      margin-bottom: 22px;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: 0.02em;
-    }
-
-    .logo img {
-      height: 40px;
-      margin-right: 10px;
-      filter: drop-shadow(0 4px 14px rgba(255, 122, 0, 0.25));
-    }
-
-    .logo span { display: inline-flex; align-items: baseline; }
-
-    .hub-header h1 {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: clamp(2.1rem, 4.4vw, 3.4rem);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin: 0 0 14px;
-      background: linear-gradient(135deg, var(--text) 30%, var(--text-dim) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .lead {
-      font-size: 1.05rem;
-      color: var(--text-dim);
-      max-width: 560px;
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    /* ---------- grid & groups ---------- */
 
     .hub-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 36px;
-    }
-
-    .resource-group {
-      opacity: 0;
-      transform: translateY(24px);
-    }
-
-    .resource-group.in-view {
-      animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes reveal {
-      to { opacity: 1; transform: translateY(0); }
+      gap: 32px;
     }
 
     .resource-group h2 {
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       font-family: var(--font-mono);
-      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       color: var(--accent);
-      margin: 0 0 22px;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -300,219 +50,115 @@
     .resource-group h2::after {
       content: "";
       height: 1px;
-      background: linear-gradient(90deg, var(--border), transparent);
+      background: var(--border-soft);
       flex-grow: 1;
     }
 
     .link-list {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
-    /* ---------- resource cards (glass, 3D, tilt) ---------- */
-
     .resource-card {
-      position: relative;
       background: var(--surface);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       padding: 20px;
       display: flex;
       align-items: center;
       gap: 16px;
+      transition: all 0.2s ease;
       text-decoration: none;
-      overflow: hidden;
-      box-shadow: var(--shadow-lift);
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                  border-color 0.35s ease, background 0.35s ease;
-      transform-style: preserve-3d;
-      will-change: transform;
     }
-
-    /* animated border glow sweep */
-    .resource-card::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      padding: 1px;
-      background: conic-gradient(from var(--angle, 0deg), transparent 0%, var(--accent) 12%, transparent 24%);
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      animation: spin-angle 3.4s linear infinite paused;
-      pointer-events: none;
-    }
-
-    @property --angle {
-      syntax: '<angle>';
-      initial-value: 0deg;
-      inherits: false;
-    }
-
-    @keyframes spin-angle {
-      to { --angle: 360deg; }
-    }
-
-    /* shine sweep */
-    .resource-card::after {
-      content: "";
-      position: absolute;
-      top: 0; left: -60%;
-      width: 40%; height: 100%;
-      background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.10), transparent);
-      transform: skewX(-18deg);
-      transition: left 0.7s ease;
-      pointer-events: none;
-    }
-
-    .resource-card:hover::after { left: 130%; }
-    .resource-card:hover::before { opacity: 1; animation-play-state: running; }
 
     .resource-card:hover {
-      border-color: transparent;
+      border-color: var(--accent);
       background: var(--surface-2);
-      transform: translateY(-6px) scale(1.012);
-      box-shadow: var(--shadow-hover);
+      transform: translateX(4px);
     }
 
-    .resource-card:active { transform: translateY(-2px) scale(0.99); }
-
     .icon-box {
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       background: var(--surface-2);
-      border: 1px solid var(--border-soft);
       border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--accent);
-      font-family: var(--font-display);
-      font-weight: 700;
       flex-shrink: 0;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease;
-      transform: translateZ(20px);
-    }
-
-    .resource-card:hover .icon-box {
-      transform: translateZ(20px) rotate(-8deg) scale(1.08);
-      background: var(--accent-soft);
     }
 
     .resource-info {
       display: flex;
       flex-direction: column;
-      gap: 3px;
-      transform: translateZ(12px);
     }
 
     .resource-info span {
       color: var(--text);
       font-weight: 600;
       font-size: 1rem;
-      letter-spacing: -0.01em;
     }
 
     .resource-info small {
       color: var(--text-faint);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
     }
 
-    /* ---------- footer ---------- */
-
     .hub-footer {
-      margin-top: 88px;
-      padding-top: 28px;
+      margin-top: 80px;
+      padding-top: 24px;
       border-top: 1px solid var(--border-soft);
       text-align: center;
       color: var(--text-faint);
       font-size: 0.85rem;
     }
 
-    /* ---------- responsive ---------- */
-
     @media (max-width: 760px) {
-      .top-controls { top: 14px; right: 14px; }
-      .ctrl-btn { padding: 8px 11px; font-size: 0.72rem; }
-      .resource-hub { padding: 84px 0 40px; }
-      .hub-header { text-align: center; margin-bottom: 44px; }
-      .logo { justify-content: center; }
-      .lead { margin: 0 auto; }
-      .hub-grid { grid-template-columns: 1fr; gap: 28px; }
-    }
+      .hub-header {
+        text-align: center;
+      }
 
-    @media (max-width: 420px) {
-      .container { padding: 0 18px; }
-      .ctrl-btn span.label { display: none; }
+      .hub-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="bg-field" aria-hidden="true">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-    <div class="grain"></div>
-  </div>
-
-  <div class="top-controls">
-    <button class="ctrl-btn" id="themeToggle" type="button" aria-label="Toggle theme">
-      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round"></svg>
-      <span class="label" id="themeLabel">Dark</span>
-    </button>
-    <button class="ctrl-btn" id="langToggle" type="button" aria-label="Toggle language">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-        stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <line x1="2" y1="12" x2="22" y2="12"></line>
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-      </svg>
-      <span class="label" id="langLabel">EN</span>
-    </button>
-  </div>
-
   <main class="resource-hub">
     <div class="container">
       <header class="hub-header">
-        <div class="logo">
-          <img src="img/logo.png" alt="TREXAVE Logo">
+        <div class="logo" style="margin-bottom: 12px;">
+          <img src="img/trexave.png" alt="TREXAVE Logo" style="height: 40px; margin-right: 8px;">
           <span>TRE<span style="font-size: 2rem; color: var(--accent);">X</span>AVE</span>
         </div>
-        <h1 data-i18n="title">Company Resource Hub</h1>
-        <p class="lead" data-i18n="lead">Internal directory for team members to access all shared resources and
-          platforms.</p>
+        <h1>Company Resource Hub</h1>
+        <p class="lead">Internal directory for team members to access all shared resources and platforms.</p>
       </header>
 
       <div class="hub-grid">
         <!-- Documentation & Planning -->
         <section class="resource-group">
-          <h2 data-i18n="group.docs">Documentation</h2>
+          <h2>Documentation</h2>
           <div class="link-list">
             <a href="https://app.notion.com/p/PHASE-1-FOUNDATION-LAUNCH-ACTIVATION-Execution-Aligned-398a2119f56380f297a5c622847fe8cf?source=copy_link"
               class="resource-card" target="_blank">
               <div class="icon-box">N</div>
               <div class="resource-info">
-                <span data-i18n="notion.title">Notion Workspace</span>
-                <small data-i18n="notion.desc">Internal docs, SOPs, and roadmap</small>
+                <span>Notion Workspace</span>
+                <small>Internal docs, SOPs, and roadmap</small>
               </div>
             </a>
             <a href="https://drive.google.com/drive/folders/11KpIzoAZDk5y-8XsuSW869JH6icxdfEM?usp=sharing"
               class="resource-card" target="_blank">
               <div class="icon-box">D</div>
               <div class="resource-info">
-                <span data-i18n="drive.title">Google Drive</span>
-                <small data-i18n="drive.desc">Shared assets, files, and legal docs</small>
+                <span>Google Drive</span>
+                <small>Shared assets, files, and legal docs</small>
               </div>
             </a>
           </div>
@@ -520,50 +166,48 @@
 
         <!-- Product Environments -->
         <section class="resource-group">
-          <h2 data-i18n="group.sites">Our Sites</h2>
+          <h2>Our Sites</h2>
           <div class="link-list">
             <a href="retailos.html" class="resource-card">
               <div class="icon-box">R</div>
               <div class="resource-info">
-                <span data-i18n="retailos.title">RetailOS Landing Page</span>
-                <small data-i18n="retailos.desc">Public-facing marketing site</small>
+                <span>RetailOS Landing Page</span>
+                <small>Public-facing marketing site</small>
               </div>
             </a>
-            <a href="https://github.com/ENJ-digitalhub/Sales_Management_System" class="resource-card"
-              target="_blank">
+            <a href="https://github.com/ENJ-digitalhub/Sales_Management_System" class="resource-card" target="_blank">
               <div class="icon-box">G</div>
               <div class="resource-info">
-                <span data-i18n="github.title">GitHub Repository</span>
-                <small data-i18n="github.desc">Source code and version control</small>
+                <span>GitHub Repository</span>
+                <small>Source code and version control</small>
               </div>
-            </a>
-            <a href="trexave.html" class="resource-card">
-              <div class="icon-box">T</div>
-              <div class="resource-info">
-                <span data-i18n="trexave.title">Trexave Landing Page</span>
-                <small data-i18n="trexave.desc">Company site</small>
-              </div>
-            </a>
+              <a href="trexave/index.html" class="resource-card">
+                <div class="icon-box">T</div>
+                <div class="resource-info">
+                  <span>Trevave Landing Page</span>
+                  <small>Company site</small>
+                </div>
+              </a>
           </div>
         </section>
 
         <!-- Communication & Social -->
         <section class="resource-group">
-          <h2 data-i18n="group.social">Social &amp; Comms</h2>
+          <h2>Social & Comms</h2>
           <div class="link-list">
             <a href="https://www.facebook.com/profile.php?id=61591849526141&mibextid=ZbWKwL" class="resource-card"
               target="_blank">
               <div class="icon-box">F</div>
               <div class="resource-info">
-                <span data-i18n="fb.title">Facebook</span>
-                <small data-i18n="fb.desc">Official company page</small>
+                <span>Facebook</span>
+                <small>Official company page</small>
               </div>
             </a>
             <a href="https://whatsapp.com/channel/0029Vb8WngeKmCPNN6YK0Y0V" class="resource-card" target="_blank">
               <div class="icon-box">W</div>
               <div class="resource-info">
-                <span data-i18n="wa.title">WhatsApp Channel</span>
-                <small data-i18n="wa.desc">Official Update Channel</small>
+                <span>WhatsApp Channel</span>
+                <small>Official Update Channel</small>
               </div>
             </a>
             <!-- <a href="#" class="resource-card" target="_blank">
@@ -585,151 +229,10 @@
       </div>
 
       <footer class="hub-footer">
-        <p data-i18n="footer">© 2026 TREXAVE. Internal Use Only.</p>
+        <p>© 2026 TREXAVE. Internal Use Only.</p>
       </footer>
     </div>
   </main>
-
-  <script>
-    // ===================== THEME TOGGLE =====================
-    const root = document.documentElement;
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const themeLabel = document.getElementById('themeLabel');
-
-    const sunPath = '<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>';
-    const moonPath = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
-
-    function applyTheme(theme) {
-      if (theme === 'light') {
-        root.setAttribute('data-theme', 'light');
-        themeIcon.innerHTML = sunPath;
-        themeLabel.textContent = 'Light';
-      } else {
-        root.removeAttribute('data-theme');
-        themeIcon.innerHTML = moonPath;
-        themeLabel.textContent = 'Dark';
-      }
-    }
-
-    let savedTheme = 'dark';
-    try { savedTheme = localStorage.getItem('trexave-theme') || 'dark'; } catch (e) {}
-    applyTheme(savedTheme);
-
-    themeToggle.addEventListener('click', () => {
-      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      applyTheme(next);
-      try { localStorage.setItem('trexave-theme', next); } catch (e) {}
-    });
-
-    // ===================== LANGUAGE TOGGLE =====================
-    const translations = {
-      en: {
-        title: 'Company Resource Hub',
-        lead: 'Internal directory for team members to access all shared resources and platforms.',
-        'group.docs': 'Documentation',
-        'group.sites': 'Our Sites',
-        'group.social': 'Social & Comms',
-        'notion.title': 'Notion Workspace',
-        'notion.desc': 'Internal docs, SOPs, and roadmap',
-        'drive.title': 'Google Drive',
-        'drive.desc': 'Shared assets, files, and legal docs',
-        'retailos.title': 'RetailOS Landing Page',
-        'retailos.desc': 'Public-facing marketing site',
-        'github.title': 'GitHub Repository',
-        'github.desc': 'Source code and version control',
-        'trexave.title': 'Trexave Landing Page',
-        'trexave.desc': 'Company site',
-        'fb.title': 'Facebook',
-        'fb.desc': 'Official company page',
-        'wa.title': 'WhatsApp Channel',
-        'wa.desc': 'Official Update Channel',
-        footer: '© 2026 TREXAVE. Internal Use Only.'
-      },
-      fr: {
-        title: "Portail de ressources de l'entreprise",
-        lead: "Répertoire interne permettant à l'équipe d'accéder à toutes les ressources et plateformes partagées.",
-        'group.docs': 'Documentation',
-        'group.sites': 'Nos sites',
-        'group.social': 'Réseaux & communication',
-        'notion.title': 'Espace Notion',
-        'notion.desc': 'Documents internes, procédures et feuille de route',
-        'drive.title': 'Google Drive',
-        'drive.desc': 'Fichiers, ressources et documents juridiques partagés',
-        'retailos.title': 'Page RetailOS',
-        'retailos.desc': 'Site vitrine public',
-        'github.title': 'Dépôt GitHub',
-        'github.desc': 'Code source et gestion de versions',
-        'trexave.title': 'Page Trexave',
-        'trexave.desc': "Site de l'entreprise",
-        'fb.title': 'Facebook',
-        'fb.desc': "Page officielle de l'entreprise",
-        'wa.title': 'Chaîne WhatsApp',
-        'wa.desc': 'Canal officiel des mises à jour',
-        footer: '© 2026 TREXAVE. Usage interne uniquement.'
-      }
-    };
-
-    const langToggle = document.getElementById('langToggle');
-    const langLabel = document.getElementById('langLabel');
-    const i18nNodes = document.querySelectorAll('[data-i18n]');
-
-    function applyLang(lang) {
-      const dict = translations[lang] || translations.en;
-      i18nNodes.forEach((node) => {
-        const key = node.getAttribute('data-i18n');
-        if (dict[key]) node.textContent = dict[key];
-      });
-      document.documentElement.setAttribute('lang', lang);
-      langLabel.textContent = lang.toUpperCase();
-    }
-
-    let savedLang = 'en';
-    try { savedLang = localStorage.getItem('trexave-lang') || 'en'; } catch (e) {}
-    applyLang(savedLang);
-
-    langToggle.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('lang') || 'en';
-      const next = current === 'en' ? 'fr' : 'en';
-      applyLang(next);
-      try { localStorage.setItem('trexave-lang', next); } catch (e) {}
-    });
-
-    // ===================== CURSOR-REACTIVE CARD TILT =====================
-    const cards = document.querySelectorAll('.resource-card');
-    cards.forEach((card) => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const cx = rect.width / 2;
-        const cy = rect.height / 2;
-        const rotateX = ((y - cy) / cy) * -4;
-        const rotateY = ((x - cx) / cx) * 4;
-        card.style.transform = `translateY(-6px) scale(1.012) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
-
-    // ===================== SCROLL REVEAL =====================
-    const groups = document.querySelectorAll('.resource-group');
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-          if (entry.isIntersecting) {
-            entry.target.style.animationDelay = (i * 0.08) + 's';
-            entry.target.classList.add('in-view');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15 });
-      groups.forEach((g) => observer.observe(g));
-    } else {
-      groups.forEach((g) => g.classList.add('in-view'));
-    }
-  </script>
 
 </body>
 
