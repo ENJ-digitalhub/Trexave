@@ -35,9 +35,9 @@
         </nav>
         <div class="header-actions">
           <a href="#cta" class="btn btn-primary">Join Beta</a>
-          <button id="theme-toggle" class="icon-btn" aria-label="Toggle light and dark mode">
-            <span class="icon">&#9728;</span> <!-- Sun icon -->
-          </button>
+          <!-- <button id="theme-toggle" class="icon-btn" aria-label="Toggle light and dark mode">
+            <span class="icon">&#9728;</span> Sun icon
+          </button> -->
           <!-- FIX: language selector removed. It listed 11 languages but only
                ever logged the selection to the console — presenting a control
                that visibly does nothing is worse than not offering it. Add it
@@ -322,22 +322,8 @@
         </p>
       </div>
 
-      <div class="sync-diagram">
-        <div class="sync-node">Store PC (RetailOS Server)</div>
-        <div class="sync-connection">
-          <div class="line"></div>
-          <div class="label">Local WiFi</div>
-          <div class="line"></div>
-        </div>
-        <div class="sync-node">Staff Devices (Phones/Tablets)</div>
-        <div class="sync-arrow">&#8597;</div>
-        <div class="sync-connection">
-          <div class="line"></div>
-          <div class="label">Cloud Sync (Roadmap)</div>
-          <div class="line"></div>
-        </div>
-        <div class="sync-node">External Services</div>
-      </div>
+      <img src="img/high-level-description-a-minimal-technic_yIEvfsHTXVWi6moIODACPw_TNvdQXN1SEa4HBq-sjLTTQ_cover.jpg"
+        class="sync-diagram"></img>
     </div>
   </section>
 
@@ -635,11 +621,23 @@
           <div class="report-grid">
             <div class="report-card">
               <div class="card-title">Revenue Overview</div>
-              <div class="report-chart-placeholder">[ Revenue Graph ]</div>
+              <svg class="report-chart-svg" viewBox="0 0 280 90" preserveAspectRatio="none" aria-hidden="true">
+                <polygon class="report-chart-area"
+                  points="0,68 40,58 80,62 120,42 160,48 200,28 240,34 280,14 280,90 0,90" />
+                <polyline class="report-chart-line" points="0,68 40,58 80,62 120,42 160,48 200,28 240,34 280,14" />
+              </svg>
             </div>
             <div class="report-card">
               <div class="card-title">Profit Trend</div>
-              <div class="report-chart-placeholder">[ Profit Graph ]</div>
+              <div class="report-bar-chart" aria-hidden="true">
+                <div class="report-bar" style="height: 55%;"></div>
+                <div class="report-bar" style="height: 62%;"></div>
+                <div class="report-bar" style="height: 48%;"></div>
+                <div class="report-bar" style="height: 70%;"></div>
+                <div class="report-bar" style="height: 65%;"></div>
+                <div class="report-bar" style="height: 82%;"></div>
+                <div class="report-bar" style="height: 90%;"></div>
+              </div>
             </div>
             <div class="report-card">
               <div class="card-title">Sales by Category</div>
@@ -712,11 +710,11 @@
              time a store actually signs up. -->
         <div class="spots-bar">
           <div class="spots-bar-track">
-            <div class="spots-bar-fill" style="width: 70%;"></div>
+            <div class="spots-bar-fill" id="spotsBarFill" style="width: 0%;"></div>
           </div>
           <div class="spots-bar-label">
-            <span><strong>7 of 10</strong> beta spots claimed</span>
-            <span class="spots-left">3 spots left</span>
+            <span id="spotsClaimedLabel"><strong>–</strong> beta spots claimed</span>
+            <span class="spots-left" id="spotsLeftLabel"></span>
           </div>
         </div>
 

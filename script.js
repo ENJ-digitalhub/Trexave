@@ -197,6 +197,7 @@
             submitBtn.textContent = 'Sent'
             formSuccess.hidden = false;
           }
+          incrementSpots();
         })
         .catch(function (err) {
           console.error('EmailJS error:', err);
@@ -257,3 +258,45 @@
     resetShotTimer();
   }
 })();
+
+/* ---------------------------------------------------------------------
+     5. Live beta spots counter (CountAPI-backed)
+     --------------------------------------------------------------------- */
+  var TOTAL_SPOTS = 10;
+  var BASE_CLAIMED = 6; // spots claimed before live tracking started
+  var COUNTAPI_NS = 'trexave-retailos';
+  var COUNTAPI_KEY = 'beta-signups';
+
+  var spotsBarFill = document.getElementById('spotsBarFill');
+  var spotsClaimedLabel = document.getElementById('spotsClaimedLabel');
+  var spotsLeftLabel = document.getElementById('spotsLeftLabel');
+
+  function renderSpots(liveCount) {
+    var claimed = Math.min(BASE_CLAIMED + (liveCount || 0), TOTAL_SPOTS);
+    var left = Math.max(TOTAL_SPOTS - claimed, 0);
+    var pct = (claimed / TOTAL_SPOTS) * 100;
+
+    if (spotsBarFill) spotsBarFill.style.width = pct + '%';
+    if (spotsClaimedLabel) {
+      spotsClaimedLabel.innerHTML = '<strong>' + claimed + ' of ' + TOTAL_SPOTS + '</strong> beta spots claimed';
+    }
+    if (spotsLeftLabel) {
+      spotsLeftLabel.textContent = left > 0 ? (left + ' spot' + (left === 1 ? '' : 's') + ' left') : 'Waitlist open';
+    }
+  }
+
+  function fetchSpots() {
+    fetch('https://api.countapi.xyz/get/' + COUNTAPI_NS + '/' + COUNTAPI_KEY)
+      .then(function (r) { if (!r.ok) throw new Error('no counter yet'); return r.json(); })
+      .then(function (data) { renderSpots(data.value); })
+      .catch(function () { renderSpots(0); }); // counter not created yet — show base only
+  }
+
+  function incrementSpots() {
+    fetch('https://api.countapi.xyz/hit/' + COUNTAPI_NS + '/' + COUNTAPI_KEY)
+      .then(function (r) { return r.json(); })
+      .then(function (data) { renderSpots(data.value); })
+      .catch(function () { /* non-fatal — form already succeeded */ });
+  }
+
+  if (spotsBarFill) fetchSpots();

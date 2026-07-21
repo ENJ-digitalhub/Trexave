@@ -1853,6 +1853,38 @@ p:last-child {
   justify-content: flex-end;
 }
 
+.report-chart-svg {
+  width: 100%;
+  height: 90px;
+  display: block;
+}
+
+.report-chart-area {
+  fill: var(--accent);
+  opacity: 0.14;
+}
+
+.report-chart-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.report-bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 90px;
+}
+
+.report-bar {
+  flex: 1;
+  background: linear-gradient(180deg, var(--success), rgba(47, 214, 140, 0.35));
+  border-radius: 3px 3px 0 0;
+}
+
 @media (max-width: 760px) {
 
   .desktop-mockup-content,
